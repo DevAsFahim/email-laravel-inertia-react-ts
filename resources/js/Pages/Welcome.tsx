@@ -1,15 +1,11 @@
 import { Link, Head } from '@inertiajs/react';
 import { PageProps } from '@/types';
-import EmailTemplate from '../Components/Email/EmailTemplate'
 
-export default function Welcome({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVersion: string, phpVersion: string }>) {
+export default function Welcome({ auth, templates }: PageProps<{ auth: Object|null, templates: Object }>) {
     return (
         <>
             <Head title="Welcome" />
-
-            <EmailTemplate></EmailTemplate>
-
-
+            <h1> Hello Email Templates</h1>
         </>
     );
 }

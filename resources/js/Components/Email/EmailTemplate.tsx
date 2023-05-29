@@ -1,8 +1,9 @@
-import { FormEvent, FormEventHandler, useState } from 'react';
+import { FormEvent, FormEventHandler, useCallback, useMemo, useState } from 'react';
 import { BlockManager, BasicType, AdvancedType, JsonToMjml } from 'easy-email-core';
 import { EmailEditor, EmailEditorProvider, IEmailTemplate } from 'easy-email-editor';
 import { ExtensionProps, StandardLayout } from 'easy-email-extensions';
 import { useWindowSize } from 'react-use';
+import { PageProps } from '@/types';
 import mjml from 'mjml-browser';
 import './EmailTemplate.css'
 
@@ -86,11 +87,11 @@ const categories: ExtensionProps['categories'] = [
 ];
 
 
-const initialValues = {
-  subject: 'Welcome to Easy-email',
-  subTitle: 'Nice to meet you!',
-  content: BlockManager.getBlockByType(BasicType.PAGE)!.create({}),
-};
+// const initialValues = {
+//   subject: 'Welcome to Easy-email',
+//   subTitle: 'Nice to meet you!',
+//   content: BlockManager.getBlockByType(BasicType.PAGE)!.create({}),
+// };
 
 function pushEvent(params: {
   event: string;
@@ -132,65 +133,51 @@ const onExportHtml = (values: IEmailTemplate) => {
   alert('Copied to pasteboard!');
 };
 
+const saveTemplate = (values: any) => {
 
-// const [values, setValues] = useState({
-//   name: "",
-// })
-
-// const handleChange = (e: FormEvent) => {
-//   const key = e.target;
-//   const value = (e.target).value;
-//   // setValues(values => ({
-//   //     ...values,
-//   //     [key]: value,
-//   // }))
-//   console.log(value)
-// }
-
-
-const saveName = {
-  name: 'fahim',
-}
-
-const handleSubmit = () => {
-  router.post(route('data-add'), saveName);
+  const jsonData = {
+    name: 'Fahim',
+    source_code: JSON.stringify(values)
+  }
+  
+  router.post(route('data-add'), jsonData);
+  alert('data added successfully')
 };
 
-// const { register, handleSubmit, formState: { errors } } = useForm();
+export default function EmailTemplate({ template }: PageProps<{ template: Object }>) {
+  
+  // console.log(JSON.parse(template.source_code).content)
+  const templateContent = JSON.parse(template.source_code).content
 
-//   const onSubmit = data => {
-//     Inertia.post('/inputs', data);
-//   };
-
-export default function EmailTemplate() {
+  const [templateData, setTemplateData] = useState<IEmailTemplate['content']>(templateContent);
+  
   const { width } = useWindowSize();
 
-  const smallScene = width < 1400;
+  const smallScene = width < 2000;
+
+  const initialValues: IEmailTemplate | null = useMemo(() => {
+    return {
+      subject: 'Welcome to Easy-email',
+      subTitle: 'Nice to meet you!',
+      content: templateData
+    };
+  }, [templateData]);
 
   return (
     <>
-    {/* <button type="button" className='bg-green-400 px-[30px] py-[10px] text-white' onClick={handleSubmit}>Submit Name</button> */}
-    {/* <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <label>Value:</label>
-        <input {...register('value', { required: true, maxLength: 255 })} />
-        {errors.value && <span>This field is required.</span>}
-      </div>
-      <button type="submit">Submit</button>
-    </form> */}
       <EmailEditorProvider
         data={initialValues}
         height={'calc(100vh - 72px)'}
         autoComplete
         dashed={false}
       >
-        {({ values }) => {
+        {({ values }, { submit }) => {
           return (
             <>
 
               <header className='m-5'>
                 <button onClick={() => onExportHtml(values)} className='bg-blue-600 px-7 py-3 rounded-md text-white'>Copy HTML</button>
-                <button className='bg-green-500 px-7 py-3 ml-3 rounded-md text-white' onClick={handleSubmit}>Save</button>
+                <button  onClick={() => saveTemplate(values)} className='bg-green-500 px-7 py-3 ml-3 rounded-md text-white'>Save</button>
               </header>
 
               <StandardLayout
