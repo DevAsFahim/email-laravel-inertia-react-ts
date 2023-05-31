@@ -20,42 +20,6 @@ import '@arco-themes/react-easy-email-theme/css/arco.css';
 import { Router } from 'ziggy-js';
 import { router } from '@inertiajs/react';
 
-const managerCustom = BlockMarketManager.addCategories([
-  {
-    title: 'Custom',
-    name: 'custom',
-    blocks: [
-      {
-        type: BasicType.TEXT,
-        title: 'Text',
-        description: 'This block allows you to display text in your email.',
-        component: () => {
-          return (
-            <BlockMaskWrapper
-              type={BasicType.TEXT}
-              payload={{
-                attributes: {
-                  'font-size': '20px',
-                  align: 'center',
-                  padding: '0px 0px 0px 0px',
-                  color: '#4A90E2',
-                  background: '#FF0000',
-                },
-                data: {
-                  value: {
-                    content: '20px',
-                  },
-                },
-              }}
-            >
-              <div style={{ fontSize: 20, width: '100%', paddingLeft: 20 }}>20px</div>
-            </BlockMaskWrapper>
-          );
-        },
-      },
-    ],
-  },
-]);
 
 const categories: ExtensionProps['categories'] = [
   {
@@ -163,12 +127,9 @@ const categories: ExtensionProps['categories'] = [
   },
 ];
 
-const handleTest = () => {
-  alert('kire beda')
-}
-BlockAttributeConfigurationManager.add({
-  [AdvancedType.TEXT]: () => <div onClick={handleTest}>will be overwrite `color`</div>,
-});
+// BlockAttributeConfigurationManager.add({
+//   [AdvancedType.TEXT]: () => <div onClick={handleTest}>will be overwrite `color`</div>,
+// });
 
 // const initialValues = {
 //   subject: 'Welcome to Easy-email',
