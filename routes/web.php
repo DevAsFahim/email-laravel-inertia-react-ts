@@ -44,6 +44,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::post('/add-data', [TemplateController::class, 'addData'])->name('data-add');
+Route::post('/add-data', [TemplateController::class, 'addTemplate'])->name('data-add');
 
 require __DIR__.'/auth.php';

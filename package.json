@@ -29,8 +29,16 @@
         "easy-email-core": "^4.13.0",
         "easy-email-editor": "^4.13.0",
         "easy-email-extensions": "^4.13.0",
+        "final-form": "^4.20.9",
+        "final-form-arrays": "^3.1.0",
+        "final-form-set-field-touched": "^1.0.1",
+        "is-hotkey": "^0.2.0",
+        "lodash": "^4.17.21",
         "mjml-browser": "^4.14.1",
         "react-final-form": "^6.5.9",
-        "react-hook-form": "^7.44.2"
+        "react-final-form-arrays": "^3.1.4",
+        "react-hook-form": "^7.44.2",
+        "react-use": "^17.4.0",
+        "sass": "^1.62.1"
     }
 }

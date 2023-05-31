@@ -20,7 +20,7 @@ class TemplateController extends Controller
         ]);
     }
 
-    public function addData(Request $request) {
+    public function addTemplate(Request $request) {
 
         $data = new EmailTemplate();
         $data->name = $request->name;
@@ -31,7 +31,12 @@ class TemplateController extends Controller
     }
 
     public function templates() {
-        return Inertia::render('Templates');
+        $data = EmailTemplate::all();
+        $templates = json_decode($data);
+        
+        return Inertia::render('Templates', [  
+            'templates' => $templates,
+        ]);
     }
 
     public function templateEditor($id = 1) {

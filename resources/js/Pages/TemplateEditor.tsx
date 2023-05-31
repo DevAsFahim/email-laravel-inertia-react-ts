@@ -5,7 +5,6 @@ import { Link } from '@inertiajs/react';
 import EmailTemplate from '@/Components/Email/EmailTemplate';
 
 export default function TemplateEditor({ auth, template }: PageProps<{ auth: Object | null, template: Object }>) {
-    console.log(template)
     return (
         <AuthenticatedLayout
             user={auth.user}
