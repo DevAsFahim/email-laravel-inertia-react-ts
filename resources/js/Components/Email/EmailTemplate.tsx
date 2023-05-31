@@ -1,7 +1,7 @@
 import { FormEvent, FormEventHandler, useCallback, useMemo, useState } from 'react';
-import { BlockManager, BasicType, AdvancedType, JsonToMjml, IBlockData } from '@/packages/easy-email-core/src';
-import { BlockAvatarWrapper, EmailEditor, EmailEditorProvider, IEmailTemplate } from '@/packages/easy-email-editor/src/index';
-import { ExtensionProps, StandardLayout } from '@/packages/easy-email-extensions/src';
+import { BlockManager, BasicType, AdvancedType, JsonToMjml, IBlockData } from 'easy-email-core';
+import { BlockAvatarWrapper, EmailEditor, EmailEditorProvider, IEmailTemplate } from 'easy-email-editor';
+import { ExtensionProps, StandardLayout } from 'easy-email-extensions';
 import { useWindowSize } from 'react-use';
 import NProgress from 'nprogress'
 import { PageProps } from '@/types';
